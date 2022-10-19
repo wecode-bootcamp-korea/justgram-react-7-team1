@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./Main.scss";
 import instagram from "./image/instagram.png";
 const Main = () => {
+  //댓글 개수 관리 state
+  const [commentArray, setCommentArray] = useState([]);
+
+  //댓글을 상태관리
+  const [id, setId] = useState(1);
+  const value = useRef();
+
+  //댓글을 추가하는 함수
+  const addComment = () => {
+    setId(id + 1);
+    const newComment = {
+      id: id,
+      content: value.current.value,
+    };
+
+    setCommentArray([...commentArray, newComment]);
+  };
+
   return (
     <div className="main">
       <header>
@@ -17,249 +35,279 @@ const Main = () => {
             <input type="text" placeholder="검색" id="searchInput" />
           </div>
           <div id="headerRight">
-            <div id="explore" class="logos"></div>
-            <div id="heart" class="logos"></div>
-            <div id="profile" class="logos"></div>
+            <div id="explore" className="logos"></div>
+            <div id="heart" className="logos"></div>
+            <div id="profile" className="logos"></div>
           </div>
         </div>
       </header>
-      <main class="alignCenter">
+      <main className="alignCenter">
         {/* <!-- feed 1번 --> */}
-        <div class="feed">
-          <div class="feedHeader">
-            <div class="profileDiv alignCenter">
-              <div class="user alignCenter">
-                <img src="./image/cookie.jpg" alt="" class="profileImg" />
-                <span class="userName">dawon_Oh</span>
+        <div className="feed">
+          <div className="feedHeader">
+            <div className="profileDiv alignCenter">
+              <div className="user alignCenter">
+                <img src="./image/cookie.jpg" alt="" className="profileImg" />
+                <span className="userName">dawon_Oh</span>
               </div>
-              <div class="feedHeaderMenu">
+              <div className="feedHeaderMenu">
                 <img
                   src="./image/option.png"
                   alt=""
-                  class="feedHeaderMenuImg"
+                  className="feedHeaderMenuImg"
                 />
               </div>
             </div>
           </div>
-          <div class="feedImgDiv alignCenter">
-            <img src="./image/sky.jpg" alt="하늘이미지" class="feedImg" />
+          <div className="feedImgDiv alignCenter">
+            <img src="./image/sky.jpg" alt="하늘이미지" className="feedImg" />
           </div>
-          <div class="feedMenu">
-            <div id="feedLeft" class="alignCenter">
+          <div className="feedMenu">
+            <div id="feedLeft" className="alignCenter">
               <div id="feedHeart">
-                <img src="./image/heart.png" alt="좋아요" class="feedIcon" />
+                <img
+                  src="./image/heart.png"
+                  alt="좋아요"
+                  className="feedIcon"
+                />
               </div>
               <div id="feedComment">
                 <img
                   src="./image/speech-bubble.png"
                   alt="댓글보기"
-                  class="feedIcon"
+                  className="feedIcon"
                 />
               </div>
               <div id="feedSend">
-                <img src="./image/send.png" alt="공유하기" class="feedIcon" />
+                <img
+                  src="./image/send.png"
+                  alt="공유하기"
+                  className="feedIcon"
+                />
               </div>
             </div>
 
-            <div id="feedRight" class="alignCenter">
+            <div id="feedRight" className="alignCenter">
               <div id="feedMark">
                 <img
                   src="./image/bookmark-white.png"
                   alt="저장하기"
-                  class="feedIcon"
+                  className="feedIcon"
                 />
               </div>
             </div>
           </div>
-          <div class="comment">
-            <p class="countLikes commentP">좋아요 4개</p>
-            <p class="commentP">
-              <span class="writer">dawon_Oh</span>
-              <span class="content">날씨 좋다🌞</span>
-            </p>
-            <p class="commentP grayFont">댓글 2개 모두 보기</p>
-            <div class="commentList">
-              <p class="commentP">
-                <span class="writer">dawon_Oh</span>
-                <span class="tag">@friend_1</span>
-                <span class="content">날씨가 좋네요 요즘!</span>
+          <div className="comment">
+            <p className="countLikes commentP">좋아요 4개</p>
+            <div className="commentList">
+              <p className="commentP">
+                <span className="writer">dawon_Oh</span>
+                <span className="content">날씨 좋다🌞</span>
               </p>
+              {commentArray.map((comment) => {
+                return (
+                  <p className="commentP" key={comment.id}>
+                    <span className="writer">dawon_Oh</span>
+                    <span className="tag">@friend_1</span>
+                    <span className="content">{comment.content}</span>
+                  </p>
+                );
+              })}
             </div>
-            <div class="writeDate grayFont">2일 전</div>
+            <div className="writeDate grayFont">2일 전</div>
           </div>
-          <div class="addComment alignCenter">
-            <div class="addCommentLogoAndInput alignCenter">
-              <div class="smileIcon">
-                <img src="./image/emoticon.png" alt="" class="smile" />
+          <div className="addComment alignCenter">
+            <div className="addCommentLogoAndInput alignCenter">
+              <div className="smileIcon">
+                <img src="./image/emoticon.png" alt="" className="smile" />
               </div>
-              <div class="inputForm">
+              <div className="inputForm">
                 <input
                   type="text"
                   placeholder="댓글 달기..."
-                  class="commentInput"
+                  className="commentInput"
+                  ref={value}
                 />
               </div>
             </div>
-            <button class="addBtn">게시</button>
+            <button className="addBtn" onClick={addComment}>
+              게시
+            </button>
           </div>
         </div>
         {/* <!-- feed 2번 --> */}
-        <div class="feed">
-          <div class="feedHeader">
-            <div class="profileDiv alignCenter">
-              <div class="user alignCenter">
-                <img src="./image/cookie.jpg" alt="" class="profileImg" />
-                <span class="userName">dawon_Oh</span>
+        <div className="feed">
+          <div className="feedHeader">
+            <div className="profileDiv alignCenter">
+              <div className="user alignCenter">
+                <img src="./image/cookie.jpg" alt="" className="profileImg" />
+                <span className="userName">dawon_Oh</span>
               </div>
-              <div class="feedHeaderMenu">
+              <div className="feedHeaderMenu">
                 <img
                   src="./image/option.png"
                   alt=""
-                  class="feedHeaderMenuImg"
+                  className="feedHeaderMenuImg"
                 />
               </div>
             </div>
           </div>
-          <div class="feedImgDiv alignCenter">
-            <img src="./image/cafe.jpg" alt="카페이미지" class="feedImg" />
+          <div className="feedImgDiv alignCenter">
+            <img src="./image/cafe.jpg" alt="카페이미지" className="feedImg" />
           </div>
-          <div class="feedMenu">
-            <div id="feedLeft" class="alignCenter">
+          <div className="feedMenu">
+            <div id="feedLeft" className="alignCenter">
               <div id="feedHeart">
-                <img src="./image/heart.png" alt="좋아요" class="feedIcon" />
+                <img
+                  src="./image/heart.png"
+                  alt="좋아요"
+                  className="feedIcon"
+                />
               </div>
               <div id="feedComment">
                 <img
                   src="./image/speech-bubble.png"
                   alt="댓글보기"
-                  class="feedIcon"
+                  className="feedIcon"
                 />
               </div>
               <div id="feedSend">
-                <img src="./image/send.png" alt="공유하기" class="feedIcon" />
+                <img
+                  src="./image/send.png"
+                  alt="공유하기"
+                  className="feedIcon"
+                />
               </div>
             </div>
 
-            <div id="feedRight" class="alignCenter">
+            <div id="feedRight" className="alignCenter">
               <div id="feedMark">
                 <img
                   src="./image/bookmark-white.png"
                   alt="저장하기"
-                  class="feedIcon"
+                  className="feedIcon"
                 />
               </div>
             </div>
           </div>
-          <div class="comment">
-            <p class="countLikes commentP">좋아요 10개</p>
-            <p class="commentP">
-              <span class="writer">dawon_Oh</span>
-              <span class="content">차가 맛있었던 카페</span>
+          <div className="comment">
+            <p className="countLikes commentP">좋아요 10개</p>
+            <p className="commentP">
+              <span className="writer">dawon_Oh</span>
+              <span className="content">차가 맛있었던 카페</span>
             </p>
-            <p class="commentP grayFont">댓글 3개 모두 보기</p>
-            <div class="commentList">
-              <p class="commentP">
-                <span class="writer">dawon_Oh</span>
-                <span class="tag">@friend_2</span>
-                <span class="content">ㅋㅋㅋㅋㅋㅋㅋ🤣</span>
+            <p className="commentP grayFont">댓글 3개 모두 보기</p>
+            <div className="commentList">
+              <p className="commentP">
+                <span className="writer">dawon_Oh</span>
+                <span className="tag">@friend_2</span>
+                <span className="content">ㅋㅋㅋㅋㅋㅋㅋ🤣</span>
               </p>
             </div>
-            <div class="writeDate grayFont">3일 전</div>
+            <div className="writeDate grayFont">3일 전</div>
           </div>
-          <div class="addComment alignCenter">
-            <div class="addCommentLogoAndInput alignCenter">
-              <div class="smileIcon">
-                <img src="./image/emoticon.png" alt="" class="smile" />
+          <div className="addComment alignCenter">
+            <div className="addCommentLogoAndInput alignCenter">
+              <div className="smileIcon">
+                <img src="./image/emoticon.png" alt="" className="smile" />
               </div>
-              <div class="inputForm">
+              <div className="inputForm">
                 <input
                   type="text"
                   placeholder="댓글 달기..."
-                  class="commentInput"
+                  className="commentInput"
                 />
               </div>
             </div>
-            <button class="addBtn">게시</button>
+            <button className="addBtn">게시</button>
           </div>
         </div>
 
         {/* <!-- feed 3번 --> */}
-        <div class="feed">
-          <div class="feedHeader">
-            <div class="profileDiv alignCenter">
-              <div class="user alignCenter">
-                <img src="./image/cookie.jpg" alt="" class="profileImg" />
-                <span class="userName">dawon_Oh</span>
+        <div className="feed">
+          <div className="feedHeader">
+            <div className="profileDiv alignCenter">
+              <div className="user alignCenter">
+                <img src="./image/cookie.jpg" alt="" className="profileImg" />
+                <span className="userName">dawon_Oh</span>
               </div>
-              <div class="feedHeaderMenu">
+              <div className="feedHeaderMenu">
                 <img
                   src="./image/option.png"
                   alt=""
-                  class="feedHeaderMenuImg"
+                  className="feedHeaderMenuImg"
                 />
               </div>
             </div>
           </div>
-          <div class="feedImgDiv alignCenter">
-            <img src="./image/cat.jpg" alt="고양이이미지" class="feedImg" />
+          <div className="feedImgDiv alignCenter">
+            <img src="./image/cat.jpg" alt="고양이이미지" className="feedImg" />
           </div>
-          <div class="feedMenu">
-            <div id="feedLeft" class="alignCenter">
+          <div className="feedMenu">
+            <div id="feedLeft" className="alignCenter">
               <div id="feedHeart">
-                <img src="./image/heart.png" alt="좋아요" class="feedIcon" />
+                <img
+                  src="./image/heart.png"
+                  alt="좋아요"
+                  className="feedIcon"
+                />
               </div>
               <div id="feedComment">
                 <img
                   src="./image/speech-bubble.png"
                   alt="댓글보기"
-                  class="feedIcon"
+                  className="feedIcon"
                 />
               </div>
               <div id="feedSend">
-                <img src="./image/send.png" alt="공유하기" class="feedIcon" />
+                <img
+                  src="./image/send.png"
+                  alt="공유하기"
+                  className="feedIcon"
+                />
               </div>
             </div>
 
-            <div id="feedRight" class="alignCenter">
+            <div id="feedRight" className="alignCenter">
               <div id="feedMark">
                 <img
                   src="./image/bookmark-white.png"
                   alt="저장하기"
-                  class="feedIcon"
+                  className="feedIcon"
                 />
               </div>
             </div>
           </div>
-          <div class="comment">
-            <p class="countLikes commentP">좋아요 12개</p>
-            <p class="commentP">
-              <span class="writer">dawon_Oh</span>
-              <span class="content">😺</span>
+          <div className="comment">
+            <p className="countLikes commentP">좋아요 12개</p>
+            <p className="commentP">
+              <span className="writer">dawon_Oh</span>
+              <span className="content">😺</span>
             </p>
-            <p class="commentP grayFont">댓글 4개 모두 보기</p>
-            <div class="commentList">
-              <p class="commentP">
-                <span class="writer">dawon_Oh</span>
-                <span class="tag">@friend_3</span>
-                <span class="content">😺😺😺</span>
+            <p className="commentP grayFont">댓글 4개 모두 보기</p>
+            <div className="commentList">
+              <p className="commentP">
+                <span className="writer">dawon_Oh</span>
+                <span className="tag">@friend_3</span>
+                <span className="content">😺😺😺</span>
               </p>
             </div>
-            <div class="writeDate grayFont">4일 전</div>
+            <div className="writeDate grayFont">4일 전</div>
           </div>
-          <div class="addComment alignCenter">
-            <div class="addCommentLogoAndInput alignCenter">
-              <div class="smileIcon">
-                <img src="./image/emoticon.png" alt="" class="smile" />
+          <div className="addComment alignCenter">
+            <div className="addCommentLogoAndInput alignCenter">
+              <div className="smileIcon">
+                <img src="./image/emoticon.png" alt="" className="smile" />
               </div>
-              <div class="inputForm">
+              <div className="inputForm">
                 <input
                   type="text"
                   placeholder="댓글 달기..."
-                  class="commentInput"
+                  className="commentInput"
                 />
               </div>
             </div>
-            <button class="addBtn">게시</button>
+            <button className="addBtn">게시</button>
           </div>
         </div>
       </main>
