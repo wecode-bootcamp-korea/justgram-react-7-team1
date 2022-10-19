@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.log {
+  header {
+    font-size: 80px;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 50px;
+  }
+
+  .login-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-area__input {
+    width: 535px;
+    background-color: #fafafa;
+    padding: 11px;
+    margin-bottom: 10px;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+  }
+
+  .login-area__input:focus {
+    outline: none;
+  }
+
+  .login-btn {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+
+    button {
+      width: 535px;
+      font-size: 20px;
+      margin-top: 15px;
+      background-color: #cde9f4;
+      color: white;
+      padding: 10px;
+      border-radius: 7px;
+      border: none;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .footer-area {
+    text-align: center;
+    margin-top: 200px;
+  }
+
+  .footer {
+    text-decoration: none;
+    color: #003569;
+    font-size: large;
+  }
+
+  button:disabled {
+    background-color: #c4e1fa;
+  }
+}
