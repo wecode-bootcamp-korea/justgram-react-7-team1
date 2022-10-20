@@ -7,14 +7,33 @@ function Feed({ img, myComment, comment }) {
   const value = useRef();
   const [commentArray, setCommentArray] = useState([]);
 
-  const addComment = () => {
+  //게시버튼 클릭으로 댓글입력
+  const addComment = (e) => {
+    if (value.current.value === '') {
+      e.preventDefault();
+    } else {
+      commentForm();
+    }
+  };
+  //input창에 enter로 댓글입력
+  const enterComment = (e) => {
+    if (value.current.value === '') {
+      e.preventDefault();
+    } else if (e.keyCode == '13') {
+      commentForm();
+    }
+  };
+
+  function commentForm() {
     setId(id + 1);
     const newComment = {
       id: id,
       content: value.current.value,
     };
     setCommentArray([...commentArray, newComment]);
-  };
+    value.current.value = '';
+  }
+
   return (
     <>
       <main className='feed container'>
@@ -94,6 +113,7 @@ function Feed({ img, myComment, comment }) {
               placeholder='댓글 달기...'
               className='main-five__input'
               ref={value}
+              onKeyUp={enterComment}
             />
             <p className='main-five__button' onClick={addComment}>
               게시
