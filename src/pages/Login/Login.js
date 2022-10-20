@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 
 function Login() {
-  const navigate = useNavigate;
+  const navi = useNavigate;
 
   const goMain = () => {
-    navigate("/main");
+    navi("/main");
+  };
+
+  const [id, setid] = useState("");
+  const [pw, setpw] = useState("");
+  const [isValid, setisValid] = useState();
+
+  const idSetting = (e) => {
+    setid(e.target.value);
+    id.includes("@") && pw.length > 5 ? setisValid(true) : setisValid(false);
+  };
+
+  const pwSetting = (e) => {
+    setpw(e.target.value);
+    console.log(pw);
+    id.includes("@") && pw.length > 5 ? setisValid(true) : setisValid(false);
   };
 
   return (
@@ -22,13 +37,25 @@ function Login() {
               id="id_box"
               type="text"
               placeholder="  전화번호,사용자 이름 또는 이메일"
+              onChange={idSetting}
+              value={id}
             />
           </div>
           <div className="loginbox">
-            <input id="pw_box" type="password" placeholder="  비밀번호" />
+            <input
+              id="pw_box"
+              type="password"
+              placeholder="  비밀번호"
+              onChange={pwSetting}
+              value={pw}
+            />
           </div>
           <p>
-            <button onClick={goMain} id="loginbtn">
+            <button
+              style={{ backgroundColor: isValid ? "#4ec5f4" : "#cde9f4" }}
+              onClick={goMain}
+              id="loginbtn"
+            >
               로그인
             </button>
           </p>
