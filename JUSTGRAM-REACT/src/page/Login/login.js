@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Login.scss';
 import { Link } from 'react-router-dom';
 
 function Login() {
-  const [firstInput, setFirstInput] = useState('');
-  const [secondInput, setSecondInput] = useState('');
+  // const [firstInput, setFirstInput] = useState(''); //값이 바로 적용되지 않아서 유효성검사에는 잘쓰이지않는다
+  // const [secondInput, setSecondInput] = useState('');
+
+  const id = useRef(); //값을 참조한다(값에 바로 접근이 가능하다)
+  const pw = useRef();
   const [isvalid, setIsvalid] = useState(false);
 
   const preventSubmit = (e) => {
     e.preventDefault();
   };
-  const handleInput = (e) => {
-    setFirstInput(e.target.value);
-    firstInput.includes('@') && secondInput.length >= 5
-      ? setIsvalid(true)
-      : setIsvalid(false);
-  };
-  const handlePwdInput = (e) => {
-    setSecondInput(e.target.value);
-    firstInput.includes('@') && secondInput.length >= 5
+  const handleInput = () => {
+    id.current.value.includes('@') && pw.current.value.length >= 5
       ? setIsvalid(true)
       : setIsvalid(false);
   };
@@ -30,14 +26,14 @@ function Login() {
       <form className='login-area' onChange={preventSubmit}>
         <input
           onChange={handleInput}
-          value={firstInput}
+          ref={id}
           className='login-area__input'
           type='text'
           placeholder='이메일@필수'
         />
         <input
-          value={secondInput}
-          onChange={handlePwdInput}
+          ref={pw}
+          onChange={handleInput}
           className='login-area__input login-area__input2'
           type='password'
           placeholder='비밀번호(5글자이상작성해주세요)'

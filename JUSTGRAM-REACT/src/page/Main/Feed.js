@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import './Feed.scss';
 
 function Feed({ img }) {
   const [comment, setComment] = useState();
