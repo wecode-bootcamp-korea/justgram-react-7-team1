@@ -37,9 +37,21 @@ function Main() {
           />
         </div>
       </nav>
-      <Feed img={'images/4.jpeg'} />
-      <Feed img={'images/키카.jpg'} />
-      <Feed img={'images/부산.PNG'} />
+      <Feed
+        img={'images/4.jpeg'}
+        myComment={'헤외여행가고싶따'}
+        comment={'나랑같이가자~😁'}
+      />
+      <Feed
+        img={'images/키카.jpg'}
+        myComment={'애랑 캠핑가고 싶다 같이 갈사람?'}
+        comment={'저요!'}
+      />
+      <Feed
+        img={'images/부산.PNG'}
+        myComment={'해운대 놀러가서 찍은사진'}
+        comment={'우와 대박이네👀'}
+      />
     </div>
   );
 }

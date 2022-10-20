@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './Feed.scss';
+import Comment from './Comment';
 
-function Feed({ img }) {
-  const [comment, setComment] = useState();
+function Feed({ img, myComment, comment }) {
   const [id, setId] = useState(1);
   const value = useRef();
   const [commentArray, setCommentArray] = useState([]);
@@ -72,21 +72,16 @@ function Feed({ img }) {
             <div className='main-four__state'>
               <div className='main-four__state__chat'>
                 <span className='bold'>yezee-e</span>
-                <span>헤외여행가고싶따</span>
+                <span>{myComment}</span>
                 <span className='opcity'>...더보기</span>
               </div>
               <div className='main-four__state__chat'>
                 <span className='bold'>rak</span>
-                <span>나랑같이가자~😁</span>
+                <span>{comment}</span>
               </div>
               <div className='main-four__state__chat'>
                 {commentArray.map((comment) => {
-                  return (
-                    <div key={comment.id}>
-                      <span className='bold'>yezee</span>
-                      <span>{comment.content}</span>
-                    </div>
-                  );
+                  return <Comment key={comment.id} content={comment.content} />;
                 })}
               </div>
             </div>
