@@ -46,7 +46,7 @@ body {
     background-color: #fafafa;
   }
 
-  p > button {
+  #loginbtn {
     width: 265px;
     height: 35px;
     margin-top: 12px;
@@ -59,9 +59,9 @@ body {
     border-radius: 3px;
   }
 
-  p > button:hover {
-    cursor: not-allowed;
-  }
+  // p > button:hover {
+  //   cursor: not-allowed;
+  // }
 
   .loginbox {
     width: 260px;

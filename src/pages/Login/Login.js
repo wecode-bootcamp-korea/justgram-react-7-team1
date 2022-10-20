@@ -1,7 +1,14 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 
-const Login = () => {
+function Login() {
+  const navigate = useNavigate;
+
+  const goMain = () => {
+    navigate("/main");
+  };
+
   return (
     <>
       <div className="container">
@@ -21,7 +28,7 @@ const Login = () => {
             <input id="pw_box" type="password" placeholder="  비밀번호" />
           </div>
           <p>
-            <button disabled onclick="location.href='login.html'" id="loginbtn">
+            <button onClick={goMain} id="loginbtn">
               로그인
             </button>
           </p>
@@ -35,16 +42,13 @@ const Login = () => {
           </a>
         </div>
         <footer>
-          <a
-            className="instaFindPass"
-            href="https://www.instagram.com/accounts/password/reset/"
-          >
-            비밀번호를 잊으셨나요?
-          </a>
+          <Link to="/main" className="instaFindPass">
+            비밀번호를 잊으셨나요 ?
+          </Link>
         </footer>
       </div>
     </>
   );
-};
+}
 
 export default Login;

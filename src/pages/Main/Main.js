@@ -1,7 +1,7 @@
 import React from "react";
 import "./Main.scss";
 
-const Main = () => {
+function Main() {
   return (
     <>
       <header>
@@ -116,6 +116,6 @@ const Main = () => {
       </section>
     </>
   );
-};
+}
 
 export default Main;
