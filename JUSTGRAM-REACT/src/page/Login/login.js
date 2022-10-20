@@ -41,7 +41,10 @@ function Login() {
       </form>
 
       <Link to='/main' className='login-btn'>
-        <button style={{ backgroundColor: isvalid ? '#1C71E8' : '#cde9f4' }}>
+        <button
+          style={{ backgroundColor: isvalid ? '#1C71E8' : '#cde9f4' }}
+          disabled={isvalid === false}
+        >
           로그인
         </button>
       </Link>

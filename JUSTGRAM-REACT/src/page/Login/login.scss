@@ -45,6 +45,11 @@
       &:hover {
         cursor: pointer;
       }
+      &:disabled {
+        &:hover {
+          cursor: default;
+        }
+      }
     }
   }
 
