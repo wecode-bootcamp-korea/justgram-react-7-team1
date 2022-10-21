@@ -1,31 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Comment from "./Comment";
 
-const Feed = () => {
+const Feed = ({ likeCount, userName, content, feedImage }) => {
   //댓글 개수 관리 state
   const [commentArray, setCommentArray] = useState([]);
 
-  //댓글을 상태관리
-  const [id, setId] = useState(1);
-  const value = useRef();
+  useEffect(() => {
+    fetch("/data/commentData.json")
+      .then((res) => res.json())
+      .then((res) => setCommentArray(res.data));
+  }, []);
 
-  //댓글을 추가하는 함수
-  const addComment = () => {
-    setId(id + 1);
-    const newComment = {
-      id: id,
-      content: value.current.value,
-    };
-
-    setCommentArray([...commentArray, newComment]);
-  };
   return (
     <div className="feed">
       <div className="feedHeader">
         <div className="profileDiv alignCenter">
           <div className="user alignCenter">
             <img src="../../image/cookie.jpg" alt="" className="profileImg" />
-            <span className="userName">dawon_Oh</span>
+            <span className="userName">{userName}</span>
           </div>
           <div className="feedHeaderMenu">
             <img
@@ -37,7 +29,7 @@ const Feed = () => {
         </div>
       </div>
       <div className="feedImgDiv alignCenter">
-        <img src="../../image/sky.jpg" alt="하늘이미지" className="feedImg" />
+        <img src={feedImage} alt="하늘이미지" className="feedImg" />
       </div>
       <div className="feedMenu">
         <div id="feedLeft" className="alignCenter">
@@ -75,14 +67,20 @@ const Feed = () => {
         </div>
       </div>
       <div className="comment">
-        <p className="countLikes commentP">좋아요 4개</p>
+        <p className="countLikes commentP">좋아요 {likeCount}개</p>
         <div className="commentList">
           <p className="commentP">
             <span className="writer">dawon_Oh</span>
-            <span className="content">날씨 좋다🌞</span>
+            <span className="content">{content}</span>
           </p>
           {commentArray.map((comment) => {
-            return <Comment content={comment.content} key={comment.id} />;
+            return (
+              <Comment
+                content={comment.content}
+                key={comment.id}
+                writer={comment.writer}
+              />
+            );
           })}
         </div>
         <div className="writeDate grayFont">2일 전</div>
@@ -97,13 +95,10 @@ const Feed = () => {
               type="text"
               placeholder="댓글 달기..."
               className="commentInput"
-              ref={value}
             />
           </div>
         </div>
-        <button className="addBtn" onClick={addComment}>
-          게시
-        </button>
+        <button className="addBtn">게시</button>
       </div>
     </div>
   );
