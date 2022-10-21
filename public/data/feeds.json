@@ -1,0 +1,40 @@
+{
+  "feedData" :[
+    {
+      "feedId": 1,
+      "username": "gangjeong_kim",
+      "profileImage": "/images/gangjeong_main.png",
+      "feedImages": [
+        {
+          "imageId":101,
+          "imageUrl":"/images/cat.jpg"
+        }
+      ],
+      "content":"김갱정 귀엽네 근데 간식은 안줘"
+    },
+    {
+      "feedId": 2,
+      "username": "cat_MinA",
+      "profileImage": "/images/mina.png",
+      "feedImages": [
+        {
+          "imageId":201,
+          "imageUrl":"/images/minaphoto.png"
+        }
+      ],
+      "content":"엉아 나는 넥카라가 불편하지않아...괜차나 난"
+    },
+    {
+      "feedId": 3,
+      "username": "noroo_joy",
+      "profileImage": "/images/deerprofile.png",
+      "feedImages": [
+        {
+          "imageId":301,
+          "imageUrl":"/images/deerphoto.png"
+        }
+      ],
+      "content":"사람들은 날 노루라고 부르지"
+    }
+  ]
+}

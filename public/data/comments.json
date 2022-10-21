@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "userName": "ddaeng_goo",
+      "content":  "완전 이쁘네요!"
+    },
+    {
+      "id": 2,
+      "userName": "snack_boy",
+      "content":  "시골에서 과자를 줄곧 먹어왔습니다"
+    },
+    {
+      "id": 3,
+      "userName": "noroo_sorom",
+      "content":  "살짝 노로소롬하네요"
+    },
+    {
+      "id": 4,
+      "userName": "cong_ceil",
+      "content":  "캠핑가야지~"
+    },
+    {
+      "id": 5,
+      "userName": "kirkland",
+      "content":  "요즘 날씨가 춥네요"
+    }
+  ]
+}
