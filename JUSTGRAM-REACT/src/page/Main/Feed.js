@@ -1,11 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Feed.scss';
 import Comment from './Comment';
+import CommentData from './CommentData';
 
-function Feed({ img, myComment, comment }) {
+function Feed({ img, myComment, comment, likes, commenter }) {
   const [id, setId] = useState(1);
   const value = useRef();
+  //댓글 개수관리
   const [commentArray, setCommentArray] = useState([]);
+  const [mockArray, setMockArray] = useState([]);
 
   //게시버튼 클릭으로 댓글입력
   const addComment = (e) => {
@@ -19,7 +22,7 @@ function Feed({ img, myComment, comment }) {
   const enterComment = (e) => {
     if (value.current.value === '') {
       e.preventDefault();
-    } else if (e.keyCode == '13') {
+    } else if (e.keyCode === 13) {
       commentForm();
     }
   };
@@ -33,6 +36,16 @@ function Feed({ img, myComment, comment }) {
     setCommentArray([...commentArray, newComment]);
     value.current.value = '';
   }
+
+  useEffect(() => {
+    commentData();
+  }, []);
+
+  const commentData = () => {
+    fetch('/data/mockData.json')
+      .then((res) => res.json())
+      .then((res) => setMockArray(res.data));
+  };
 
   return (
     <>
@@ -85,7 +98,7 @@ function Feed({ img, myComment, comment }) {
                 style={{ width: '20px' }}
               />
               <span className='bold'>rak님</span> <span>외</span>
-              <span className='bold'>10명</span> <span>이 좋아합니다</span>
+              <span className='bold'>{likes}명</span> <span>이 좋아합니다</span>
             </div>
 
             <div className='main-four__state'>
@@ -95,8 +108,19 @@ function Feed({ img, myComment, comment }) {
                 <span className='opcity'>...더보기</span>
               </div>
               <div className='main-four__state__chat'>
-                <span className='bold'>rak</span>
+                <span className='bold'>{commenter}</span>
                 <span>{comment}</span>
+              </div>
+              <div className='main-four__state__chat'>
+                {mockArray.map((data) => {
+                  return (
+                    <CommentData
+                      key={data.id}
+                      content={data.content}
+                      nickname={data.nickname}
+                    />
+                  );
+                })}
               </div>
               <div className='main-four__state__chat'>
                 {commentArray.map((comment) => {

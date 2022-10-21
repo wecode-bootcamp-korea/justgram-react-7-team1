@@ -1,0 +1,28 @@
+{
+  "feed": [
+    {
+      "img": "images/4.jpeg",
+      "likes": 13,
+      "commenter": "rak",
+      "myComment": "해외여행가고싶따",
+      "comment": "나랑같이가자~😁",
+      "id": 1
+    },
+    {
+      "img": "images/키카.jpg",
+      "likes": 126,
+      "commenter": "kim_code",
+      "myComment": "애랑 캠핑가고 싶다 같이 갈 사람?",
+      "comment": "저요!",
+      "id": 2
+    },
+    {
+      "img": "images/부산.PNG",
+      "likes": 219,
+      "commenter": "kimkimkim",
+      "myComment": "해운대 놀러가서 찍은사진",
+      "comment": "우와 대박이네👀",
+      "id": 3
+    }
+  ]
+}

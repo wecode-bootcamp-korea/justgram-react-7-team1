@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Feed from './Feed';
 import './Main.scss';
 
 function Main() {
+  const [feedArray, setFeedArray] = useState([]);
+  useEffect(() => {
+    fetch('/data/FeedData.json')
+      .then((res) => res.json())
+      .then((res) => setFeedArray(res.feed));
+  }, []);
+
   return (
     <div className='container main'>
       <nav className='nav-bar container'>
@@ -37,21 +44,19 @@ function Main() {
           />
         </div>
       </nav>
-      <Feed
-        img={'images/4.jpeg'}
-        myComment={'헤외여행가고싶따'}
-        comment={'나랑같이가자~😁'}
-      />
-      <Feed
-        img={'images/키카.jpg'}
-        myComment={'애랑 캠핑가고 싶다 같이 갈사람?'}
-        comment={'저요!'}
-      />
-      <Feed
-        img={'images/부산.PNG'}
-        myComment={'해운대 놀러가서 찍은사진'}
-        comment={'우와 대박이네👀'}
-      />
+
+      {feedArray.map((feed) => {
+        return (
+          <Feed
+            key={feed.id}
+            img={feed.img}
+            myComment={feed.myComment}
+            comment={feed.comment}
+            likes={feed.likes}
+            commenter={feed.commenter}
+          />
+        );
+      })}
     </div>
   );
 }

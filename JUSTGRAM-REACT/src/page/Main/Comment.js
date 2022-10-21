@@ -1,7 +1,7 @@
 import React from 'react';
 import './Comment.scss';
 
-function Comment({ content }) {
+function Comment({ content, nickname }) {
   return (
     <div>
       <span className='bold'>yezee</span>
