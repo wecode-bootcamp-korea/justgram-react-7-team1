@@ -47,6 +47,11 @@ function Feed({ img, myComment, comment, likes, commenter }) {
       .then((res) => setMockArray(res.data));
   };
 
+  const deleteBtn = (index) => {
+    setCommentArray(
+      commentArray.filter((item, todoIndex) => index !== todoIndex)
+    );
+  };
   return (
     <>
       <main className='feed container'>
@@ -123,8 +128,13 @@ function Feed({ img, myComment, comment, likes, commenter }) {
                 })}
               </div>
               <div className='main-four__state__chat'>
-                {commentArray.map((comment) => {
-                  return <Comment key={comment.id} content={comment.content} />;
+                {commentArray.map((comment, index) => {
+                  return (
+                    <div className='deleteBtn'>
+                      <Comment key={comment.id} content={comment.content} />
+                      <button onClick={() => deleteBtn(index)}>❌</button>
+                    </div>
+                  );
                 })}
               </div>
             </div>
