@@ -1,0 +1,25 @@
+{
+  "feeds": [
+    {
+      "id": 1,
+      "userId": "kiminsee",
+      "content": "새우다 새우!!",
+      "feedImage": "./images/shrimp.jpeg",
+      "likeNumber": 10
+    },
+    {
+      "id": 1,
+      "userId": "kiminsee",
+      "content": "푸켓에서",
+      "feedImage": "./images/IMG_1840.jpeg",
+      "likeNumber": 19
+    },
+    {
+      "id": 1,
+      "userId": "kiminsee",
+      "content": "오늘은 밀면!!",
+      "feedImage": "./images/IMG_2015.jpeg",
+      "likeNumber": 16
+    }
+  ]
+}
