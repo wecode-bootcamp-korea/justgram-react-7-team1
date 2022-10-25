@@ -4,10 +4,28 @@ import './Main.scss';
 
 function Main() {
   const [feedArray, setFeedArray] = useState([]);
+  const [userEmail, setUserEmail] = useState();
   useEffect(() => {
     fetch('/data/FeedData.json')
       .then((res) => res.json())
       .then((res) => setFeedArray(res.feed));
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    if (!token) {
+      alert('유저가 아닙니다!');
+      return;
+    }
+    fetch('http://localhost:8000/users/me', {
+      method: 'GET',
+      headers: {
+        token: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setUserEmail(json.email));
   }, []);
 
   return (
@@ -37,11 +55,15 @@ function Main() {
             alt=''
             style={{ width: '20px', height: '20px' }}
           />
-          <img
-            src='images/profile.png'
-            alt=''
-            style={{ width: '20px', height: '20px' }}
-          />
+          {userEmail ? (
+            <span>{userEmail}</span>
+          ) : (
+            <img
+              src='images/profile.png'
+              alt=''
+              style={{ width: '20px', height: '20px' }}
+            />
+          )}
         </div>
       </nav>
 

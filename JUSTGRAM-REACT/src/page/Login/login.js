@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Login.scss';
 import { Link } from 'react-router-dom';
 
@@ -8,15 +8,29 @@ function Login() {
 
   const id = useRef(); //값을 참조한다(값에 바로 접근이 가능하다)
   const pw = useRef();
-  const [isvalid, setIsvalid] = useState(false);
+  // const [isvalid, setIsvalid] = useState(false);
 
   const preventSubmit = (e) => {
     e.preventDefault();
   };
-  const handleInput = () => {
-    id.current.value.includes('@') && pw.current.value.length >= 5
-      ? setIsvalid(true)
-      : setIsvalid(false);
+  // const handleInput = () => {
+  //   id.current.value.includes('@') && pw.current.value.length >= 5
+  //     ? setIsvalid(true)
+  //     : setIsvalid(false);
+  // };
+  const handleLogin = () => {
+    fetch('http://localhost:8000/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: id.current.value,
+        password: pw.current.value,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => localStorage.setItem('token', json.token));
   };
 
   return (
@@ -25,7 +39,7 @@ function Login() {
 
       <form className='login-area' onChange={preventSubmit}>
         <input
-          onChange={handleInput}
+          // onChange={handleInput}
           ref={id}
           className='login-area__input'
           type='text'
@@ -33,7 +47,7 @@ function Login() {
         />
         <input
           ref={pw}
-          onChange={handleInput}
+          // onChange={handleInput}
           className='login-area__input login-area__input2'
           type='password'
           placeholder='비밀번호(5글자이상작성해주세요)'
@@ -42,8 +56,9 @@ function Login() {
 
       <Link to='/main' className='login-btn'>
         <button
-          style={{ backgroundColor: isvalid ? '#1C71E8' : '#cde9f4' }}
-          disabled={isvalid === false}
+          onClick={handleLogin}
+          // style={{ backgroundColor: isvalid ? '#1C71E8' : '#cde9f4' }}
+          // disabled={isvalid === false}
         >
           로그인
         </button>
