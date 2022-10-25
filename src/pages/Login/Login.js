@@ -1,27 +1,16 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./Login.scss";
 
 function Login() {
-  const navi = useNavigate;
-
-  const goMain = () => {
-    navi("/main");
-  };
-
-  const [id, setid] = useState("");
-  const [pw, setpw] = useState("");
+  const id = useRef();
+  const pw = useRef();
   const [isValid, setisValid] = useState();
 
-  const idSetting = (e) => {
-    setid(e.target.value);
-    id.includes("@") && pw.length > 5 ? setisValid(true) : setisValid(false);
-  };
-
-  const pwSetting = (e) => {
-    setpw(e.target.value);
-    console.log(pw);
-    id.includes("@") && pw.length > 5 ? setisValid(true) : setisValid(false);
+  const handleInput = (e) => {
+    id.current.value.includes("@") && pw.current.value.length > 5
+      ? setisValid(true)
+      : setisValid(false);
   };
 
   return (
@@ -37,8 +26,8 @@ function Login() {
               id="id_box"
               type="text"
               placeholder="  전화번호,사용자 이름 또는 이메일"
-              onChange={idSetting}
-              value={id}
+              onChange={handleInput}
+              ref={id}
             />
           </div>
           <div className="loginbox">
@@ -46,14 +35,13 @@ function Login() {
               id="pw_box"
               type="password"
               placeholder="  비밀번호"
-              onChange={pwSetting}
-              value={pw}
+              onChange={handleInput}
+              ref={pw}
             />
           </div>
           <p>
             <button
               style={{ backgroundColor: isValid ? "#4ec5f4" : "#cde9f4" }}
-              onClick={goMain}
               id="loginbtn"
             >
               로그인

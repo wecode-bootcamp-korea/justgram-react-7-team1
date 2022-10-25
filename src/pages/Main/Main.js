@@ -57,7 +57,12 @@ function Main() {
             <div className="feed_picture"></div>
             <div className="menu_bar">
               <div className="menu_bar_icon">
-                <img alt="" width="30px" height="30px" />
+                <img
+                  alt="하트"
+                  src="/assets/images/img/heart.png"
+                  width="30px"
+                  height="30px"
+                />
                 <img
                   alt="코멘트"
                   src="/assets/images/img/comment.png"
@@ -66,7 +71,7 @@ function Main() {
                 />
                 <img
                   alt="업로드"
-                  src="/assets/images/img/heart.png"
+                  src="/assets/images/img/upload.png"
                   width="30px"
                   height="30px"
                 />
