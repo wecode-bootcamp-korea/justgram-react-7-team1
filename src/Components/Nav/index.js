@@ -56,7 +56,7 @@ export function Nav() {
                 className="icon-profile"
                 alt="profile-icon"
                 src="/images/profile.png"
-              />
+              /> //삼항연산자 이용 조건부 렌더링
             )}
           </div>
         </div>
