@@ -4,11 +4,30 @@ import "./Main.scss";
 
 const Main = () => {
   const [feedArray, setFeedArray] = useState([]);
+  const [userEmail, setUserEmail] = useState();
 
   useEffect(() => {
     fetch("/data/FeedData.json")
       .then((res) => res.json())
       .then((res) => setFeedArray(res.data));
+  }, []);
+
+  useEffect(() => {
+    //1. 토큰 가져오기
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (!token) {
+      alert("유저가 아닙니다!");
+      return;
+    }
+    fetch("http://localhost:8000/users/me", {
+      method: "GET",
+      headers: {
+        token: token,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => setUserEmail(result.email));
   }, []);
 
   return (
@@ -28,7 +47,11 @@ const Main = () => {
           <div id="headerRight">
             <div id="explore" className="logos"></div>
             <div id="heart" className="logos"></div>
-            <div id="profile" className="logos"></div>
+            {userEmail ? (
+              <span>{userEmail}</span>
+            ) : (
+              <div id="profile" className="logos"></div>
+            )}
           </div>
         </div>
       </header>

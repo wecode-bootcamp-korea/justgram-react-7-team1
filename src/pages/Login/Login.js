@@ -1,16 +1,31 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Login.scss";
 
 const Login = () => {
   const id = useRef();
   const pw = useRef();
 
-  const [isValid, setIsValid] = useState(false);
+  // const [isValid, setIsValid] = useState(false);
 
-  const handleInput = () => {
-    id.current.value.includes("@") && pw.current.value.length >= 5
-      ? setIsValid(true)
-      : setIsValid(false);
+  // const handleInput = () => {
+  //   id.current.value.includes("@") && pw.current.value.length >= 5
+  //     ? setIsValid(true)
+  //     : setIsValid(false);
+  // };
+
+  const handleLogin = () => {
+    fetch("http://localhost:8000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: id.current.value,
+        password: pw.current.value,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => localStorage.setItem("token", result.token));
   };
 
   return (
@@ -23,7 +38,6 @@ const Login = () => {
             className="inputArea"
             id="idInput"
             placeholder="전화번호, 사용자 이름 또는 이메일"
-            onChange={handleInput}
             ref={id}
           />
           <input
@@ -31,13 +45,9 @@ const Login = () => {
             className="inputArea"
             id="pwInput"
             placeholder="비밀번호"
-            onChange={handleInput}
             ref={pw}
           />
-          <button
-            id="loginBtn"
-            style={{ backgroundColor: isValid ? "black" : "yellow" }}
-          >
+          <button onClick={handleLogin} id="loginBtn">
             <span>로그인</span>
           </button>
         </form>
