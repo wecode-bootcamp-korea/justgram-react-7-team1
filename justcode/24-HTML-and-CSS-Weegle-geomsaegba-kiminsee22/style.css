@@ -1,0 +1,24 @@
+.container {
+  width: 300px;
+  margin-left: 100px;
+}
+
+img {
+  width: 100%;
+}
+
+.good {
+  width: 400px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  position: relative;
+}
+
+.no {
+  color: gray;
+}
+
+.fa-sharp fa-solid fa-keyboard, .fa-solid fa-microphone {
+  display: inline-block;
+  margin-left: 20px;
+}
